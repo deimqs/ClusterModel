@@ -97,9 +97,9 @@ def sampling_array(xmin, xmax, NptPd=10, unit=False):
         my_unit = xmin.unit
         array = np.logspace(np.log10(xmin.to_value(my_unit)),
                             np.log10(xmax.to_value(my_unit)),
-                             int(NptPd*(np.log10(xmax.to_value(my_unit)/xmin.to_value(my_unit)))))*my_unit
+                            int(NptPd*(np.log10(xmax.to_value(my_unit)/xmin.to_value(my_unit)))))*my_unit
     else:
-        array = np.logspace(np.log10(xmin), np.log10(xmax), 100)
+        array = np.logspace(np.log10(xmin), np.log10(xmax), int(NptPd*(np.log10(xmax/xmin))))
 
     return array
 

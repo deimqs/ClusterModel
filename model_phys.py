@@ -579,7 +579,7 @@ class Physics(object):
         """
 
         Rcut = self._X_cr_E['R_norm']
-        
+                
         # Get the thermal energy
         rad_uth, U_th = self.get_thermal_energy_profile(Rcut)
         

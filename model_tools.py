@@ -24,7 +24,7 @@ def check_qarray(qarr, unit=None):
     - qarr (quantity): quantity array
 
     """
-
+    
     if unit is None:
         if type(qarr) == float:
             qarr = np.array([qarr])
@@ -35,10 +35,11 @@ def check_qarray(qarr, unit=None):
         except:
             raise TypeError("Unvalid unit for qarr")
 
-        if type(qarr.to_value()) == float:
+        if type(qarr.to_value()) == float or type(qarr.to_value()) == np.float64:
             qarr = np.array([qarr.to_value()]) * qarr.unit
 
     return qarr
+
 
 
 #==================================================
@@ -96,9 +97,9 @@ def sampling_array(xmin, xmax, NptPd=10, unit=False):
         my_unit = xmin.unit
         array = np.logspace(np.log10(xmin.to_value(my_unit)),
                             np.log10(xmax.to_value(my_unit)),
-                            int(NptPd*(np.log10(xmax.to_value(my_unit)/xmin.to_value(my_unit)))))*my_unit
+                             int(NptPd*(np.log10(xmax.to_value(my_unit)/xmin.to_value(my_unit)))))*my_unit
     else:
-        array = np.logspace(np.log10(xmin), np.log10(xmax), int(NptPd*(np.log10(xmax/xmin))))
+        array = np.logspace(np.log10(xmin), np.log10(xmax), 100)
 
     return array
 

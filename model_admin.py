@@ -66,7 +66,7 @@ class Admin(object):
         pp = pprint.PrettyPrinter(indent=4)
         
         par = self.__dict__
-        keys = par.keys()
+        keys = list(par.keys())
         
         for k in range(len(keys)):
             print('--- '+(keys[k])[1:])
@@ -100,7 +100,7 @@ class Admin(object):
 
         # Text file for user
         par = self.__dict__
-        keys = par.keys()
+        keys = list(par.keys())
         with open(self._output_dir+'/parameters.txt', 'w') as txtfile:
             for k in range(len(keys)):
                 txtfile.write('--- '+(keys[k])[1:]+'\n')
@@ -610,11 +610,11 @@ class Admin(object):
 
         # saving
         sfile = open(filename, 'wb')
-        sfile.writelines(['#'+col1_name, ('{:>'+str(ncar)+'}').format(''), col2_name+'\n'])
+        sfile.writelines([('#'+col1_name).encode(), ('{:>'+str(ncar)+'}').format('').encode(), (col2_name+'\n').encode()])
         for il in range(len(col1)):
-            sfile.writelines([('{:.'+str(ndec)+'e}').format(col1[il]),
-                              ('{:>'+str(ncar)+'}').format(''),
-                              ('{:.'+str(ndec)+'e}').format(col2[il])+'\n'])
+            sfile.writelines([('{:.'+str(ndec)+'e}').format(col1[il]).encode(),
+                              ('{:>'+str(ncar)+'}').format('').encode(),
+                              ('{:.'+str(ndec)+'e}').format(col2[il]).encode()+b'\n'])
         sfile.close()
         
         
